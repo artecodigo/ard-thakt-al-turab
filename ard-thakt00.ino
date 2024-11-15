@@ -24,23 +24,24 @@ Servo servo1;
 Servo servo2;
 Servo servo3;
 
+// offsets to zero servos at vertical arm position
+const int offset_1 = 60;
+const int offset_2 = 115;
+const int offset_3 = 90;
+
 // values to write to servo
-int dataServo1 = 90;
-int dataServo2 = 90;
-int dataServo3 = 90;
+int dataServo1, dataServo2, dataServo3;
 
 // servo position targets
-int dstServo1 = 90;
-int dstServo2 = 90;
-int dstServo3 = 90;
-
-// for controlling motion speed
-int dstTime = 100; // frame s
-unsigned long long ttime = 0;
+int dstServo1, dstServo2, dstServo3;
 
 // for changing modes
 unsigned long long starttime = 0;
-unsigned long long sectiondur = 3000;
+unsigned long long sectiondur = 3000; // millis
+
+// for changing mode actions
+int dstTime = 1000; // millis
+unsigned long long ttime = 0;
 
 enum {
    IDLE,
@@ -65,7 +66,9 @@ void setup(){
    servo1.attach(SERVO_1);
    servo2.attach(SERVO_2);
    servo3.attach(SERVO_3);
-   writeServos(dataServo1, dataServo2, dataServo3);
+   // writeServos(dataServo1, dataServo2, dataServo3);
+   updateServos(0,0,0);
+   delay(5000);
 
    // init OLED
    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -76,8 +79,6 @@ void setup(){
 
 
 void loop(){
-
-   ttime++;
 
    switch(mode) {
       case IDLE:
@@ -91,10 +92,11 @@ void loop(){
 
    updateDsts();
    updateOLED();
-   updateMode();
+   //updateMode();
    // Serial.println((int)ttime);
 
-   delay(30);
+   // regulate motion speed
+   delay(5);
 }
 
 
@@ -106,12 +108,18 @@ void writeServos(int x, int y, int z) {
    servo2.write(y);
    servo3.write(z);
 
-   // Serial.print("wrote ");Serial.print((int)ttime);Serial.print(" servos : ");
+   // Serial.print("wrote ");Serial.print((int)ttime);   (" servos : ");
    // Serial.print(x);
    // Serial.print("  ");Serial.print(y);
    // Serial.print("  ");Serial.print(z);
    // Serial.println("  ");
 
+}
+
+void updateServos(int a1, int a2, int a3) {
+   servo1.write(-a1 + offset_1);
+   servo2.write(180 - (-a2 + offset_2)); // servo 2 is inverted
+   servo3.write(-a3 + offset_3);
 }
 
 
@@ -143,7 +151,8 @@ void updateDsts() {
    // Serial.println((int)ttime);
 
    if(wr){
-      writeServos(dataServo1, dataServo2, dataServo3);
+      //writeServos(dataServo1, dataServo2, dataServo3);
+      updateServos(dataServo1, dataServo2, dataServo3);
    }
 }
 
@@ -165,24 +174,37 @@ void updateMode() {
 
 void do_IDLEPOSE(){
 
-   if (ttime % 60 == 0) {
+   if (millis() - ttime > dstTime) {
 
-   idletime++;
+      ttime = millis();;
+      idletime++;
 
-   dstServo1 = random(60, 80);
-   dstServo2 = random(60, 80);
-   dstServo3 = random(60, 80);
+      int a, b, c;
 
       if (idletime > 2) {
          idletime = 0;
-
-         dstServo1 = random(40, 120);
-         dstServo2 = random(30, 20);
-         dstServo3 = random(20, 40);
+         a = random(-40, 40);
+         b = random(-40, 40);
+         c = random(-40, 40);
+         Serial.print("IDLE_B\t");
+      } else {
+         a = random(-60, 60);
+         b = random(-60, 60);
+         c = random(-60, 60);
+         Serial.print("IDLE_A\t");
       }
+
+      Serial.print(a);
+      Serial.print('\t');
+      Serial.print(b);
+      Serial.print('\t');
+      Serial.println(c);
+
+      dstServo1 = a;
+      dstServo2 = b;
+      dstServo3 = c;
    }
 }
-
 
 void updateOLED() {
    display.clearDisplay();
