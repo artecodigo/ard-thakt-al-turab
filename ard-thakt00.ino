@@ -69,7 +69,6 @@ void setup(){
    servo1.attach(SERVO_1);
    servo2.attach(SERVO_2);
    servo3.attach(SERVO_3);
-   // writeServos(dataServo1, dataServo2, dataServo3);
    updateServos(0,0,0);
    delay(5000);
 
@@ -104,19 +103,6 @@ void loop(){
 
 // utilities ---------------------------------------------------------------- //
 
-void writeServos(int x, int y, int z) {
-
-   servo1.write(x);
-   servo2.write(y);
-   servo3.write(z);
-
-   // Serial.print("wrote ");Serial.print((int)ttime);   (" servos : ");
-   // Serial.print(x);
-   // Serial.print("  ");Serial.print(y);
-   // Serial.print("  ");Serial.print(z);
-   // Serial.println("  ");
-
-}
 
 void updateServos(int a1, int a2, int a3) {
    servo1.write(-a1 + offset_1);
@@ -125,10 +111,10 @@ void updateServos(int a1, int a2, int a3) {
 }
 
 
-// low pass filters for smooth motion
+// low pass filters for smooth motion and control speed
 bool updateDsts(int frame_delay) {
 
-   printPos();
+   // printPos();
 
    int f = 10;
    bool wr = false;
@@ -171,32 +157,16 @@ bool updateDsts(int frame_delay) {
       at3 = true;
    }
 
-   // Serial.println((int)ttime);
 
    if(wr){
-      //writeServos(dataServo1, dataServo2, dataServo3);
       updateServos((int)dataServo1, (int)dataServo2, (int)dataServo3);
    }
 
    delay(frame_delay);
 
    if(at1 && at2 && at3) {
-      // Serial.print("TRUE\t");
-      // Serial.print(abs(dstServo1 - dataServo1 ));
-      // Serial.print("\t");
-      // Serial.print(abs(dstServo2 - dataServo2 ));
-      // Serial.print("\t");
-      // Serial.print(abs(dstServo3 - dataServo3 ));
-      // Serial.print("\t");
       return true;
    } else {
-      // Serial.print("FALSE\t");
-      // Serial.print(abs(dstServo1 - dataServo1 ));
-      // Serial.print("\t");
-      // Serial.print(abs(dstServo2 - dataServo2 ));
-      // Serial.print("\t");
-      // Serial.print(abs(dstServo3 - dataServo3 ));
-      // Serial.print("\t");
       return false;
    }
 }
@@ -315,6 +285,8 @@ void do_SWEEP() {
    while(!updateDsts(s));
 
    delay(3000);
+
+   updateMode();
 
 }
 
