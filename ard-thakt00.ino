@@ -34,10 +34,13 @@ int dstServo1 = 90;
 int dstServo2 = 90;
 int dstServo3 = 90;
 
+// for controlling motion speed
 int dstTime = 100; // frame s
 unsigned long long ttime = 0;
-unsigned long long starttime = 100;
-unsigned long long sectiondur = 100;
+
+// for changing modes
+unsigned long long starttime = 0;
+unsigned long long sectiondur = 3000;
 
 enum {
    IDLE,
@@ -46,6 +49,7 @@ enum {
    AS_0,
    AS_1,
 } MODES;
+int num_modes = 5;
 
 int idletime = 0;
 int mode = IDLEPOSE;
@@ -87,8 +91,10 @@ void loop(){
 
    updateDsts();
    updateOLED();
+   updateMode();
    // Serial.println((int)ttime);
 
+   delay(30);
 }
 
 
@@ -100,11 +106,11 @@ void writeServos(int x, int y, int z) {
    servo2.write(y);
    servo3.write(z);
 
-   Serial.print("wrote ");Serial.print((int)ttime);Serial.print(" servos : ");
-   Serial.print(x);
-   Serial.print("  ");Serial.print(y);
-   Serial.print("  ");Serial.print(z);
-   Serial.println("  ");
+   // Serial.print("wrote ");Serial.print((int)ttime);Serial.print(" servos : ");
+   // Serial.print(x);
+   // Serial.print("  ");Serial.print(y);
+   // Serial.print("  ");Serial.print(z);
+   // Serial.println("  ");
 
 }
 
@@ -144,6 +150,19 @@ void updateDsts() {
 
 // Modes -------------------------------------------------------------------- //
 
+void updateMode() {
+   if(millis() - starttime > sectiondur) {
+      int pmode = mode;
+      while (mode == pmode) {
+         mode = random(0,num_modes);
+      }
+      Serial.print("changing to mode: ");
+      Serial.println(mode);
+      starttime = millis();
+   }
+}
+
+
 void do_IDLEPOSE(){
 
    if (ttime % 60 == 0) {
@@ -166,6 +185,7 @@ void do_IDLEPOSE(){
 
 
 void updateOLED() {
+   display.clearDisplay();
    display.setTextSize(2);
    display.setCursor(0,0);
    display.println("CALCULAR");
