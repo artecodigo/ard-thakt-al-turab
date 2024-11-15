@@ -29,11 +29,14 @@ const int offset_1 = 60;
 const int offset_2 = 115;
 const int offset_3 = 90;
 
+// regulate motion speed
+const int main_frame_delay = 5;
+
 // values to write to servo
-int dataServo1, dataServo2, dataServo3;
+float dataServo1, dataServo2, dataServo3;
 
 // servo position targets
-int dstServo1, dstServo2, dstServo3;
+float dstServo1, dstServo2, dstServo3;
 
 // for changing modes
 unsigned long long starttime = 0;
@@ -53,14 +56,14 @@ enum {
 int num_modes = 5;
 
 int idletime = 0;
-int mode = IDLEPOSE;
+int mode = SWEEPCLEAN;// IDLEPOSE;
 
 
 // -------------------------------------------------------------------------- //
 
 void setup(){
 
-   Serial.begin(9600);
+   Serial.begin(115200);
 
    // init servos
    servo1.attach(SERVO_1);
@@ -87,16 +90,15 @@ void loop(){
          do_IDLEPOSE();
          break;
       case SWEEPCLEAN:
+         do_SWEEP();
          break;
    }
 
-   updateDsts();
+   updateDsts(main_frame_delay);
    updateOLED();
    //updateMode();
    // Serial.println((int)ttime);
 
-   // regulate motion speed
-   delay(5);
 }
 
 
@@ -124,38 +126,109 @@ void updateServos(int a1, int a2, int a3) {
 
 
 // low pass filters for smooth motion
-void updateDsts() {
+bool updateDsts(int frame_delay) {
+
+   printPos();
 
    int f = 10;
    bool wr = false;
    int md = 2; // mindist equal
 
+   // at target
+   bool at1, at2, at3;
+   at1 = at2 = at3 = false;
+
    if (dstServo1 != dataServo1 ) {
       dataServo1 += (dstServo1 - dataServo1) / f;
       wr = true;
-      if (abs(dstServo1 - dataServo1 ) < md) dataServo1 = dstServo1;
+      if (abs(dstServo1 - dataServo1 ) < md) {
+         dataServo1 = dstServo1;
+         at1 = true;
+      }
+   } else {
+      at1 = true;
    }
 
    if (dstServo2 != dataServo2 ) {
       dataServo2 += (dstServo2 - dataServo2) / f;
       wr = true;
-      if (abs(dstServo2 - dataServo2 ) < md) dataServo2 = dstServo2;
+      if (abs(dstServo2 - dataServo2 ) < md) {
+        dataServo2 = dstServo2;
+        at2 = true;
+      }
+   } else {
+      at2 = true;
    }
 
    if (dstServo3 != dataServo3 ) {
       dataServo3 += (dstServo3 - dataServo3) / f;
-      if (abs(dstServo3 - dataServo3 ) < md) dataServo3 = dstServo3;
+      if (abs(dstServo3 - dataServo3 ) < md) {
+         dataServo3 = dstServo3;
+         at3 = true;
+      }
       wr = true;
+   } else {
+      at3 = true;
    }
 
    // Serial.println((int)ttime);
 
    if(wr){
       //writeServos(dataServo1, dataServo2, dataServo3);
-      updateServos(dataServo1, dataServo2, dataServo3);
+      updateServos((int)dataServo1, (int)dataServo2, (int)dataServo3);
+   }
+
+   delay(frame_delay);
+
+   if(at1 && at2 && at3) {
+      // Serial.print("TRUE\t");
+      // Serial.print(abs(dstServo1 - dataServo1 ));
+      // Serial.print("\t");
+      // Serial.print(abs(dstServo2 - dataServo2 ));
+      // Serial.print("\t");
+      // Serial.print(abs(dstServo3 - dataServo3 ));
+      // Serial.print("\t");
+      return true;
+   } else {
+      // Serial.print("FALSE\t");
+      // Serial.print(abs(dstServo1 - dataServo1 ));
+      // Serial.print("\t");
+      // Serial.print(abs(dstServo2 - dataServo2 ));
+      // Serial.print("\t");
+      // Serial.print(abs(dstServo3 - dataServo3 ));
+      // Serial.print("\t");
+      return false;
    }
 }
 
+
+void updateOLED() {
+   display.clearDisplay();
+   display.setTextSize(2);
+   display.setCursor(0,0);
+   display.println("CALCULAR");
+   display.println("NA");
+   display.println("AREIA");
+   display.setCursor(110,40);
+   display.setTextSize(3);
+   display.print(mode);
+   display.display();
+}
+
+void printPos() {
+   Serial.print(dstServo1);
+   Serial.print('\t');
+   Serial.print(dstServo2);
+   Serial.print('\t');
+   Serial.print(dstServo3);
+   Serial.print("\t:\t");
+   Serial.print(dataServo1);
+   Serial.print('\t');
+   Serial.print(dataServo2);
+   Serial.print('\t');
+   Serial.print(dataServo3);
+   Serial.println();
+}
 
 // Modes -------------------------------------------------------------------- //
 
@@ -206,15 +279,44 @@ void do_IDLEPOSE(){
    }
 }
 
-void updateOLED() {
-   display.clearDisplay();
-   display.setTextSize(2);
-   display.setCursor(0,0);
-   display.println("CALCULAR");
-   display.println("NA");
-   display.println("AREIA");
-   display.setCursor(110,40);
-   display.setTextSize(3);
-   display.print(mode);
-   display.display();
+
+void do_SWEEP() {
+   int a2_min_pos = 30;
+   int a3_min_pos = 90;
+   int a2_max_pos = 70;
+   int a3_max_pos = 40;
+
+   int w = 50;
+   int s = 50;
+
+   int num_sweeps = 5;
+
+   int a2d = (a2_max_pos - a2_min_pos) / num_sweeps;
+   int a3d = (a3_max_pos - a3_min_pos) / num_sweeps;
+
+   dstServo2 = a2_min_pos;
+   dstServo3 = a3_min_pos;
+
+   for (int i=0; i<num_sweeps; i++) {
+      dstServo2 += a2d;
+      dstServo3 += a3d;
+      dstServo1 = -w;
+      while(!updateDsts(s));
+      dstServo1 = w;
+      while(!updateDsts(s));
+   }
+
+   dstServo1 = 0;
+   dstServo3 = -35;
+   while(!updateDsts(s));
+
+   dstServo2 = -20;
+   dstServo3 = 90;
+   while(!updateDsts(s));
+
+   delay(3000);
+
 }
+
+
+
