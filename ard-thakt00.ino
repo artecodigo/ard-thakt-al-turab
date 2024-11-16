@@ -29,6 +29,12 @@ const int offset_1 = 60;
 const int offset_2 = 115;
 const int offset_3 = 90;
 
+// A2 and A3 servo positions that roughly put the tool tip on the table
+const int a2_min_pos = 30;
+const int a3_min_pos = 90;
+const int a2_max_pos = 70;
+const int a3_max_pos = 40;
+
 // regulate motion speed
 const int main_frame_delay = 5;
 
@@ -43,7 +49,7 @@ unsigned long long starttime = 0;
 unsigned long long sectiondur = 3000; // millis
 
 // for changing mode actions
-int dstTime = 1000; // millis
+int dstTime; // millis // defined in mode funtion
 unsigned long long ttime = 0;
 
 enum {
@@ -52,11 +58,12 @@ enum {
    SWEEPCLEAN,
    AS_0,
    AS_1,
+   DOTS,
 } MODES;
 int num_modes = 5;
 
 int idletime = 0;
-int mode = SWEEPCLEAN;// IDLEPOSE;
+int mode = DOTS;// SWEEPCLEAN;// IDLEPOSE;
 
 
 // -------------------------------------------------------------------------- //
@@ -70,7 +77,7 @@ void setup(){
    servo2.attach(SERVO_2);
    servo3.attach(SERVO_3);
    updateServos(0,0,0);
-   delay(5000);
+   delay(2000);
 
    // init OLED
    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -90,6 +97,9 @@ void loop(){
          break;
       case SWEEPCLEAN:
          do_SWEEP();
+         break;
+      case DOTS:
+         do_DOTS();
          break;
    }
 
@@ -171,14 +181,35 @@ bool updateDsts(int frame_delay) {
    }
 }
 
+// given a position of one servo, estimate the postion of
+// the other servo so that the tool is touching the table
+float getA2(float a3_pos) {
+   float a3r = a3_max_pos - a3_min_pos;
+   float a3a = a3_pos - a3_min_pos;
+   float d = a3a/a3r;
+   float a2r = a2_max_pos - a2_min_pos;
+   float a2a = d * a2r + a2_min_pos;
+   return a2a;
+}
+float getA3(float a2_pos) {
+   float a2r = a2_max_pos - a2_min_pos;
+   float a2a = a2_pos - a2_min_pos;
+   float d = a2a/a2r;
+   float a3r = a3_max_pos - a3_min_pos;
+   float a3a = d * a3r + a3_min_pos;
+   return a3a;
+}
+
 
 void updateOLED() {
    display.clearDisplay();
    display.setTextSize(2);
    display.setCursor(0,0);
-   display.println("CALCULAR");
-   display.println("NA");
-   display.println("AREIA");
+   display.print("Thakt");
+   display.setCursor(0,20);
+   display.print("al");
+   display.setCursor(0,40);
+   display.print("Turab");
    display.setCursor(110,40);
    display.setTextSize(3);
    display.print(mode);
@@ -217,6 +248,8 @@ void updateMode() {
 
 void do_IDLEPOSE(){
 
+   dstTime = 1000;
+
    if (millis() - ttime > dstTime) {
 
       ttime = millis();;
@@ -251,10 +284,6 @@ void do_IDLEPOSE(){
 
 
 void do_SWEEP() {
-   int a2_min_pos = 30;
-   int a3_min_pos = 90;
-   int a2_max_pos = 70;
-   int a3_max_pos = 40;
 
    int w = 50;
    int s = 50;
@@ -292,3 +321,46 @@ void do_SWEEP() {
 
 
 
+void do_DOTS() {
+
+   dstTime = 5000;
+
+   if (millis() - ttime > dstTime) {
+
+      ttime = millis();;
+      idletime++;
+
+      int w = 60;
+      int s = 50;
+      int s2 = 5;
+      int dot = 20;
+
+      int a1 = random(-w,w);
+      int a3 = random(a3_max_pos, a3_min_pos);
+      int a2 = 0;
+
+      dstServo1 = a1;
+      dstServo2 = a2;
+      dstServo3 = a3;
+      while(!updateDsts(s));
+
+      a2 = getA2(a3);
+      dstServo2 = a2;
+      while(!updateDsts(s));
+
+      dstServo1 += dot/2;
+      while(!updateDsts(s2));
+      dstServo1 -= dot;
+      while(!updateDsts(s2));
+      dstServo1 += dot;
+      while(!updateDsts(s2));
+      dstServo1 -= dot/2;
+      while(!updateDsts(s2));
+      delay(1000);
+
+      a2 = 0;
+      dstServo2 = a2;
+      while(!updateDsts(s));
+
+   }
+}
