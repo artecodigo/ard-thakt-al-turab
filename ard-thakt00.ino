@@ -53,17 +53,17 @@ int dstTime; // millis // defined in mode funtion
 unsigned long long ttime = 0;
 
 enum {
-   IDLE,
+   // IDLE,
    IDLEPOSE,
    SWEEPCLEAN,
-   AS_0,
-   AS_1,
+   // AS_0,
+   // AS_1,
    DOTS,
 } MODES;
-int num_modes = 5;
+int num_modes = 3;
 
 int idletime = 0;
-int mode = DOTS;// SWEEPCLEAN;// IDLEPOSE;
+int mode = 1;// SWEEPCLEAN;// IDLEPOSE;
 
 
 // -------------------------------------------------------------------------- //
@@ -90,8 +90,8 @@ void setup(){
 void loop(){
 
    switch(mode) {
-      case IDLE:
-         break;
+      // case IDLE:
+      //    break;
       case IDLEPOSE:
          do_IDLEPOSE();
          break;
