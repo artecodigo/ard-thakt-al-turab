@@ -1,6 +1,7 @@
 
-
-// asier@artecodigo.pt 24
+// 24
+// asier@artecodigo.pt 
+// hello@tiago.nz
 
 
 // OLED --------------------------------------------------------------------- //
@@ -53,7 +54,7 @@ int dstTime; // millis // defined in mode funtion
 unsigned long long ttime = 0;
 
 enum {
-   // IDLE,
+   IDLE,
    IDLEPOSE,
    SWEEPCLEAN,
    // AS_0,
@@ -90,17 +91,17 @@ void setup(){
 void loop(){
 
    switch(mode) {
-      // case IDLE:
-      //    break;
-      case IDLEPOSE:
-         do_IDLEPOSE();
-         break;
-      case SWEEPCLEAN:
-         do_SWEEP();
-         break;
-      case DOTS:
-         do_DOTS();
-         break;
+	  case IDLE: // back on, do nothing for a while in the gallery
+		 break;
+	  case IDLEPOSE:
+		 do_IDLEPOSE();
+		 break;
+	  case SWEEPCLEAN:
+		 do_SWEEP();
+		 break;
+	  case DOTS:
+		 do_DOTS();
+		 break;
    }
 
    updateDsts(main_frame_delay);
@@ -135,49 +136,50 @@ bool updateDsts(int frame_delay) {
    at1 = at2 = at3 = false;
 
    if (dstServo1 != dataServo1 ) {
-      dataServo1 += (dstServo1 - dataServo1) / f;
-      wr = true;
-      if (abs(dstServo1 - dataServo1 ) < md) {
-         dataServo1 = dstServo1;
-         at1 = true;
-      }
+	  dataServo1 += (dstServo1 - dataServo1) / f;
+	  wr = true;
+	  if (abs(dstServo1 - dataServo1 ) < md) {
+		 dataServo1 = dstServo1;
+		 at1 = true;
+	  }
    } else {
-      at1 = true;
+	  at1 = true;
+	  at1 = true;
    }
 
    if (dstServo2 != dataServo2 ) {
-      dataServo2 += (dstServo2 - dataServo2) / f;
-      wr = true;
-      if (abs(dstServo2 - dataServo2 ) < md) {
-        dataServo2 = dstServo2;
-        at2 = true;
-      }
+	  dataServo2 += (dstServo2 - dataServo2) / f;
+	  wr = true;
+	  if (abs(dstServo2 - dataServo2 ) < md) {
+		dataServo2 = dstServo2;
+		at2 = true;
+	  }
    } else {
-      at2 = true;
+	  at2 = true;
    }
 
    if (dstServo3 != dataServo3 ) {
-      dataServo3 += (dstServo3 - dataServo3) / f;
-      if (abs(dstServo3 - dataServo3 ) < md) {
-         dataServo3 = dstServo3;
-         at3 = true;
-      }
-      wr = true;
+	  dataServo3 += (dstServo3 - dataServo3) / f;
+	  if (abs(dstServo3 - dataServo3 ) < md) {
+		 dataServo3 = dstServo3;
+		 at3 = true;
+	  }
+	  wr = true;
    } else {
-      at3 = true;
+	  at3 = true;
    }
 
 
    if(wr){
-      updateServos((int)dataServo1, (int)dataServo2, (int)dataServo3);
+	  updateServos((int)dataServo1, (int)dataServo2, (int)dataServo3);
    }
 
    delay(frame_delay);
 
    if(at1 && at2 && at3) {
-      return true;
+	  return true;
    } else {
-      return false;
+	  return false;
    }
 }
 
@@ -235,13 +237,13 @@ void printPos() {
 
 void updateMode() {
    if(millis() - starttime > sectiondur) {
-      int pmode = mode;
-      while (mode == pmode) {
-         mode = random(0,num_modes);
-      }
-      Serial.print("changing to mode: ");
-      Serial.println(mode);
-      starttime = millis();
+	  int pmode = mode;
+	  while (mode == pmode) {
+		 mode = random(0,num_modes);
+	  }
+	  Serial.print("changing to mode: ");
+	  Serial.println(mode);
+	  starttime = millis();
    }
 }
 
@@ -252,33 +254,33 @@ void do_IDLEPOSE(){
 
    if (millis() - ttime > dstTime) {
 
-      ttime = millis();;
-      idletime++;
+	  ttime = millis();;
+	  idletime++;
 
-      int a, b, c;
+	  int a, b, c;
 
-      if (idletime > 2) {
-         idletime = 0;
-         a = random(-40, 40);
-         b = random(-40, 40);
-         c = random(-40, 40);
-         Serial.print("IDLE_B\t");
-      } else {
-         a = random(-60, 60);
-         b = random(-60, 60);
-         c = random(-60, 60);
-         Serial.print("IDLE_A\t");
-      }
+	  if (idletime > 2) {
+		 idletime = 0;
+		 a = random(-40, 40);
+		 b = random(-40, 40);
+		 c = random(-40, 40);
+		 Serial.print("IDLE_B\t");
+	  } else {
+		 a = random(-60, 60);
+		 b = random(-60, 60);
+		 c = random(-60, 60);
+		 Serial.print("IDLE_A\t");
+	  }
 
-      Serial.print(a);
-      Serial.print('\t');
-      Serial.print(b);
-      Serial.print('\t');
-      Serial.println(c);
+	  Serial.print(a);
+	  Serial.print('\t');
+	  Serial.print(b);
+	  Serial.print('\t');
+	  Serial.println(c);
 
-      dstServo1 = a;
-      dstServo2 = b;
-      dstServo3 = c;
+	  dstServo1 = a;
+	  dstServo2 = b;
+	  dstServo3 = c;
    }
 }
 
@@ -297,12 +299,12 @@ void do_SWEEP() {
    dstServo3 = a3_min_pos;
 
    for (int i=0; i<num_sweeps; i++) {
-      dstServo2 += a2d;
-      dstServo3 += a3d;
-      dstServo1 = -w;
-      while(!updateDsts(s));
-      dstServo1 = w;
-      while(!updateDsts(s));
+	  dstServo2 += a2d;
+	  dstServo3 += a3d;
+	  dstServo1 = -w;
+	  while(!updateDsts(s));
+	  dstServo1 = w;
+	  while(!updateDsts(s));
    }
 
    dstServo1 = 0;
@@ -327,40 +329,40 @@ void do_DOTS() {
 
    if (millis() - ttime > dstTime) {
 
-      ttime = millis();;
-      idletime++;
+	  ttime = millis();;
+	  idletime++;
 
-      int w = 60;
-      int s = 50;
-      int s2 = 5;
-      int dot = 20;
+	  int w = 60;
+	  int s = 50;
+	  int s2 = 5;
+	  int dot = 20;
 
-      int a1 = random(-w,w);
-      int a3 = random(a3_max_pos, a3_min_pos);
-      int a2 = 0;
+	  int a1 = random(-w,w);
+	  int a3 = random(a3_max_pos, a3_min_pos);
+	  int a2 = 0;
 
-      dstServo1 = a1;
-      dstServo2 = a2;
-      dstServo3 = a3;
-      while(!updateDsts(s));
+	  dstServo1 = a1;
+	  dstServo2 = a2;
+	  dstServo3 = a3;
+	  while(!updateDsts(s));
 
-      a2 = getA2(a3);
-      dstServo2 = a2;
-      while(!updateDsts(s));
+	  a2 = getA2(a3);
+	  dstServo2 = a2;
+	  while(!updateDsts(s));
 
-      dstServo1 += dot/2;
-      while(!updateDsts(s2));
-      dstServo1 -= dot;
-      while(!updateDsts(s2));
-      dstServo1 += dot;
-      while(!updateDsts(s2));
-      dstServo1 -= dot/2;
-      while(!updateDsts(s2));
-      delay(1000);
+	  dstServo1 += dot/2;
+	  while(!updateDsts(s2));
+	  dstServo1 -= dot;
+	  while(!updateDsts(s2));
+	  dstServo1 += dot;
+	  while(!updateDsts(s2));
+	  dstServo1 -= dot/2;
+	  while(!updateDsts(s2));
+	  delay(1000);
 
-      a2 = 0;
-      dstServo2 = a2;
-      while(!updateDsts(s));
+	  a2 = 0;
+	  dstServo2 = a2;
+	  while(!updateDsts(s));
 
    }
 }
