@@ -1,5 +1,6 @@
 
-// 24
+// Thakt al Turab, ArteCódigo.pt 2024
+
 // asier@artecodigo.pt 
 // hello@tiago.nz
 
@@ -40,10 +41,12 @@ const int a3_max_pos = 40;
 const int main_frame_delay = 5;
 
 // values to write to servo
-float dataServo1, dataServo2, dataServo3;
+float dataServo1, dataServo2, dataServo3;               //TR: (-90.0,90.0)
+int rawdataServo1, rawdataServo2, rawdataServo3;        //AS: (0,180)
 
 // servo position targets
 float dstServo1, dstServo2, dstServo3;
+int rawdstServo1, rawdstServo2, rawdstServo3;
 
 // for changing modes
 unsigned long long starttime = 0;
@@ -55,13 +58,16 @@ unsigned long long ttime = 0;
 
 enum {
    IDLE,
-   IDLEPOSE,
+   IDLEPOSE2,
+   ZERO,
+   IDLEPOSE3,
    SWEEPCLEAN,
    // AS_0,
    // AS_1,
    DOTS,
+   ALL
 } MODES;
-int num_modes = 3;
+// int num_modes = 3;
 
 int idletime = 0;
 int mode = 1;// SWEEPCLEAN;// IDLEPOSE;
@@ -71,7 +77,8 @@ int mode = 1;// SWEEPCLEAN;// IDLEPOSE;
 
 void setup(){
 
-   Serial.begin(115200);
+//    Serial.begin(115200);
+   Serial.begin(9600);
 
    // init servos
    servo1.attach(SERVO_1);
@@ -93,8 +100,14 @@ void loop(){
    switch(mode) {
 	  case IDLE: // back on, do nothing for a while in the gallery
 		 break;
-	  case IDLEPOSE:
-		 do_IDLEPOSE();
+	  case IDLEPOSE2:
+		 do_IDLEPOSE2();
+		 break;
+	  case ZERO:
+		 do_ZERO();
+		 break;
+	  case IDLEPOSE3:
+		 do_IDLEPOSE3();
 		 break;
 	  case SWEEPCLEAN:
 		 do_SWEEP();
@@ -104,10 +117,15 @@ void loop(){
 		 break;
    }
 
-   updateDsts(main_frame_delay);
+    if (mode > ZERO)
+        updateDsts(main_frame_delay);
+    else
+        updateDstsRaw();
+
    updateOLED();
-   //updateMode();
+   updateMode();
    // Serial.println((int)ttime);
+   ttime =	ttime +	1;
 
 }
 
@@ -121,12 +139,15 @@ void updateServos(int a1, int a2, int a3) {
    servo3.write(-a3 + offset_3);
 }
 
+void updateServosRaw(int a1, int a2, int a3) {
+   servo1.write(a1);
+   servo2.write(a2);
+   servo3.write(a3);
+}
 
 // low pass filters for smooth motion and control speed
 bool updateDsts(int frame_delay) {
-
    // printPos();
-
    int f = 10;
    bool wr = false;
    int md = 2; // mindist equal
@@ -143,7 +164,6 @@ bool updateDsts(int frame_delay) {
 		 at1 = true;
 	  }
    } else {
-	  at1 = true;
 	  at1 = true;
    }
 
@@ -209,7 +229,8 @@ void updateOLED() {
    display.setCursor(0,0);
    display.print("Thakt");
    display.setCursor(0,20);
-   display.print("al");
+   display.print("al ");
+   display.print(millis()%100);
    display.setCursor(0,40);
    display.print("Turab");
    display.setCursor(110,40);
@@ -233,22 +254,159 @@ void printPos() {
    Serial.println();
 }
 
+
+
+bool updateDstsRaw() {
+   int f = 10;
+   bool wr = false;
+   int md = 2; // mindist equal
+
+   // at target
+//    bool at1, at2, at3;
+//    at1 = at2 = at3 = false;
+
+   if (rawdstServo1 != rawdataServo1 ) {
+	  rawdataServo1 += (rawdstServo1 - rawdataServo1) / f;
+	  wr = true;
+	  if (abs(rawdstServo1 - rawdataServo1 ) < md) {
+		 rawdataServo1 = rawdstServo1;
+	  }
+   } 
+
+   if (rawdstServo2 != rawdataServo2 ) {
+	  rawdataServo2 += (rawdstServo2 - rawdataServo2) / f;
+	  wr = true;
+	  if (abs(rawdstServo2 - rawdataServo2 ) < md) {
+		 rawdataServo2 = rawdstServo2;
+	  }
+   } 
+
+   if (rawdstServo3 != rawdataServo3 ) {
+	  rawdataServo3 += (rawdstServo3 - rawdataServo3) / f;
+	  wr = true;
+	  if (abs(rawdstServo3 - rawdataServo3 ) < md) {
+		 rawdataServo3 = rawdstServo3;
+	  }
+   } 
+
+   if(wr){
+	  updateServosRaw(rawdataServo1, rawdataServo2, rawdataServo3);
+   }
+
+   delay(main_frame_delay);
+
+   if( rawdstServo3==rawdataServo3 && rawdstServo2==rawdataServo2 && rawdstServo1==rawdataServo1) {
+	  return true;
+   } else {
+	  return false;
+   }
+}
+
+// switch between op pipelines
+void setDstServoVals(int a0, int a1, int a2){
+
+    if (mode > ZERO){
+        dstServo1 = a0;
+        dstServo2 = a1;
+        dstServo3 = a2;
+    } else {
+        rawdstServo1 = a0;
+        rawdstServo2 = a1;
+        rawdstServo3 = a2;
+    }
+
+}
+
+
+
+
+
+
+
 // Modes -------------------------------------------------------------------- //
 
 void updateMode() {
    if(millis() - starttime > sectiondur) {
 	  int pmode = mode;
 	  while (mode == pmode) {
-		 mode = random(0,num_modes);
+		 mode = random(ALL);
 	  }
 	  Serial.print("changing to mode: ");
 	  Serial.println(mode);
 	  starttime = millis();
+	  ttime = 0;
+
+	  sectiondur = random(15000, 55000); // entre 15 a 55segs de secção
    }
 }
 
 
-void do_IDLEPOSE(){
+
+int idletime0 = 0;
+
+void do_IDLEPOSE2(){
+    int a,b,c;
+    a = b = c = 0;
+
+    if (ttime % 60 == 0){
+        idletime0++;
+        a = random(60, 80);
+        b = random(60, 80);
+        c = random(60, 80);
+
+        if (idletime0 > 2){
+            idletime0 = 0;
+            a = random(40, 120);
+            b = random(30, 20);
+            c = random(20, 40);
+        }
+
+        setDstServoVals(a,b,c);
+    }
+}
+
+
+
+
+int boardzerox = 50;
+int boardzeroy = 80;
+int nextboard = 100;
+float rad0 = 50.0;
+
+void do_ZERO(){
+    int a,b,c;
+    a = b = c = 0;
+
+    if (nextboard){
+        int dx = (int)(cos(ttime * 0.1) * rad0);
+        int dy = (int)(sin(ttime * 0.1) * rad0);
+
+        a = dx + boardzerox;
+        b = dy + boardzeroy;
+        c = dx + 70;
+        nextboard--;
+        setDstServoVals(a,b,c);
+    } else {
+        nextboard = random(50,150);
+        boardzerox = random(40, 80);
+        boardzeroy = random(20, 80);
+        rad0 = ((float)random(1000,7000))*0.01;
+  
+        a = random(40, 120);
+        b = random(30, 20);
+        c = random(20, 40);
+
+        setDstServoVals(a,b,c);
+        while(!updateDstsRaw()) delay(random(1,20));
+    }
+
+
+}
+
+
+
+
+void do_IDLEPOSE3(){
 
    dstTime = 1000;
 
@@ -278,11 +436,15 @@ void do_IDLEPOSE(){
 	  Serial.print('\t');
 	  Serial.println(c);
 
-	  dstServo1 = a;
-	  dstServo2 = b;
-	  dstServo3 = c;
+        setDstServoVals(a,b,c);
+	//   dstServo1 = a;
+	//   dstServo2 = b;
+	//   dstServo3 = c;
    }
 }
+
+
+
 
 
 void do_SWEEP() {
