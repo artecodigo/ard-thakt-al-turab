@@ -16,7 +16,6 @@ se calculava na areia.
 0.3 -- ajustes na galeria
 
 
-
-### Liçensa
+### Licença
 
 [EUPL 1.2](https://eupl.eu/1.2/pt/)
