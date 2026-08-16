@@ -38,7 +38,9 @@ const int a2_max_pos = 70;
 const int a3_max_pos = 40;
 
 // regulate motion speed
-const int main_frame_delay = 5;
+// const int main_frame_delay = 5;
+// const int main_frame_delay = 25;
+const int main_frame_delay = 55;
 
 // values to write to servo
 float dataServo1, dataServo2, dataServo3;               //TR: (-90.0,90.0)
@@ -50,7 +52,7 @@ int rawdstServo1, rawdstServo2, rawdstServo3;
 
 // for changing modes
 unsigned long long starttime = 0;
-unsigned long long sectiondur = 3000; // millis
+unsigned long long sectiondur = 10000; // millis
 
 // for changing mode actions
 int dstTime; // millis // defined in mode funtion
@@ -70,7 +72,7 @@ enum {
 // int num_modes = 3;
 
 int idletime = 0;
-int mode = 1;// SWEEPCLEAN;// IDLEPOSE;
+int mode = 2;// SWEEPCLEAN;// IDLEPOSE;
 
 
 // -------------------------------------------------------------------------- //
@@ -122,8 +124,8 @@ void loop(){
     else
         updateDstsRaw();
 
-   updateOLED();
    updateMode();
+   updateOLED();
    // Serial.println((int)ttime);
    ttime =	ttime +	1;
 
@@ -230,7 +232,7 @@ void updateOLED() {
    display.print("Thakt");
    display.setCursor(0,20);
    display.print("al ");
-   display.print(millis()%100);
+   display.print(millis()%100000);
    display.setCursor(0,40);
    display.print("Turab");
    display.setCursor(110,40);
@@ -336,7 +338,8 @@ void updateMode() {
 	  starttime = millis();
 	  ttime = 0;
 
-	  sectiondur = random(15000, 55000); // entre 15 a 55segs de secção
+	  sectiondur = random(15000, 105000); // entre 15 a 55segs de secção
+	//   sectiondur = random(1500, 5500); // entre 15 a 55segs de secção
    }
 }
 
@@ -397,7 +400,7 @@ void do_ZERO(){
         c = random(20, 40);
 
         setDstServoVals(a,b,c);
-        while(!updateDstsRaw()) delay(random(1,20));
+        // while(!updateDstsRaw()) delay(random(1,20));
     }
 
 
