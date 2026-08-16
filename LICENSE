@@ -1,201 +1,97 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+﻿LICENÇA PÚBLICA DA UNIÃO EUROPEIA v. 1.2 
+EUPL © União Europeia 2007, 2016 
+A presente licença pública da União Europeia («EUPL») aplica-se a qualquer obra (como definido abaixo) que seja fornecido nos termos da presente licença. É proibida qualquer utilização da obra diferente da autorizada nos termos da presente licença (na medida em que tal utilização esteja abrangida por um direito do titular dos direitos de autor da obra). A obra é fornecida nos termos da presente licença caso o licenciante (como definido abaixo) tenha colocado o seguinte aviso imediatamente após a informação sobre os direitos de autor respeitantes à obra: 
+                          Licenciada nos termos da EUPL 
+ou tenha expresso por qualquer outro meio a sua vontade de licenciar a obra nos termos da EUPL.
+ 
+1.Definições 
+Na presente licença, entende-se por:  
+— Licença:a presente licença.  
+— Obra original:a obra ou software distribuídos ou comunicados pelo licenciante nos termos da presente licença, disponível como código-fonte e também como código executável, consoante o caso.  
+— Obras derivadas:obras ou software que podem ser criados pelo licenciado com base na obra original ou mediante modificações nela introduzidas. A presente licença não define o grau de modificação ou de dependência em relação à obra original necessário para classificar uma obra como obra derivada; esse grau é determinado pela legislação relativa aos direitos de autor aplicável no país mencionado no ponto 15.  
+— Obra:a obra original ou as obras dela derivadas.  
+— Código-fonte:o formato legível por pessoas da obra que é o mais adequado para ser examinado e modificado.  
+— Código executável:qualquer código que, em geral, foi compilado e se destina a ser interpretado por um computador como um programa.  
+— Licenciante:pessoa singular ou coletiva que distribui ou comunica a obra nos termos da licença.  
+— Contribuidor(es):pessoa singular ou coletiva que modifica a obra abrangida pela licença ou contribui de outro modo para a criação de uma obra derivada.  
+— Licenciado:pessoa singular ou coletiva que utiliza a obra nos termos da licença.  — Distribuição ou comunicação:ato de venda, doação, comodato, locação, distribuição, comunicação, transmissão ou qualquer outra forma de disponibilização, em linha ou fora de linha, de cópias da obra ou do acesso às suas funcionalidades essenciais a qualquer outra pessoa singular ou coletiva. 
 
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+2.Âmbito dos direitos concedidos pela licença 
+O licenciante concede ao licenciado uma licença mundial, gratuita, não exclusiva e sublicenciável, pelo período de duração dos direitos de autor sobre a obra original, para praticar os seguintes atos: 
+—  utilizar a obra em quaisquer circunstâncias e para quaisquer fins, 
+—  reproduzir a obra, 
+—  modificar a obra e fazer obras derivadas baseadas na obra, 
+—  comunicar a obra ao público, nomeadamente disponibilizando ou apresentando a obra ou cópias da obra ao público ou executando-a publicamente, consoante o caso,
+—  distribuir a obra ou cópias desta, 
+—  emprestar e locar a obra ou cópias desta, 
+—  sublicenciar os direitos sobre a obra ou cópias desta. 
+Estes direitos podem ser exercidos através de quaisquer meios, suportes ou formatos, conhecidos ou que venham a ser inventados, na medida em que tal seja permitido nos termos da legislação aplicável. Nos países em que sejam reconhecidos direitos morais, o licenciante renuncia aos seus direitos morais na medida em que a lei o permita, a fim de tornar efetiva a licença dos direitos patrimoniais acima enumerados. O licenciante concede ao licenciado, a título gratuito e não exclusivo, os direitos de utilização de quaisquer patentes de que o licenciante seja titular, na medida do necessário para a utilização dos direitos concedidos sobre a obra pela presente licença. 
 
-   1. Definitions.
+3.Comunicação do código-fonte 
+O licenciante pode fornecer a obra como código-fonte ou como código executável. Caso a obra seja fornecida como código executável, o licenciante fornece ainda uma cópia legível por computador do código-fonte da obra, juntamente com cada cópia da obra que o licenciante distribui, ou indica, em aviso colocado a seguir à informação sobre os direitos de autor que acompanha a obra, um repositório onde o código-fonte esteja acessível fácil e gratuitamente enquanto o licenciante continuar a distribuir ou comunicar a obra. 
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+4.Limitação dos direitos de autor 
+A presente licença não pretende, de modo algum, privar o licenciado dos benefícios decorrentes de qualquer exceção ou limitação dos direitos exclusivos dos titulares dos direitos sobre a obra, da caducidade desses direitos ou de outras limitações aplicáveis. 
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+5.Obrigações previstas na licença 
+A concessão dos direitos acima mencionados está sujeita a algumas restrições e obrigações impostas ao licenciado. As obrigações são as seguintes: 
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
-      "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+Direito de atribuição: o licenciado deve manter intactos todos os avisos sobre direitos de autor, patentes ou marcas, bem como todos os avisos que se referem à licença e à exclusão de garantia. O licenciado deve juntar uma cópia destes avisos e uma cópia da licença a cada cópia da obra que distribua ou comunique. O licenciado assegura que qualquer obra derivada contenha um aviso bem visível da alteração da obra e da data dessa alteração. 
 
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+Cláusula Copyleft: caso o licenciado distribua ou comunique cópias da obra original ou de obras derivadas, tal distribuição ou comunicação é feita nos termos da presente licença ou de uma versão posterior da presente licença, a menos que a obra original seja expressa e exclusivamente distribuída nos termos da presente versão da licença — por exemplo, através da comunicação «Distribuída apenas nos termos da licença EUPL v. 1.2». O licenciado (que se torna licenciante) não pode oferecer ou impor à obra ou à obra derivada termos ou condições suplementares que alterem ou restrinjam os termos da licença. 
 
-      "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+Cláusula de compatibilidade: caso o licenciado distribua ou comunique obras derivadas ou cópias destas baseadas na obra e noutras obras licenciadas nos termos de uma licença compatível, tal distribuição ou comunicação pode ser feita nos termos dessa licença compatível. No âmbito da presente cláusula, entende-se por «licença compatível» uma licença enumerada no apêndice anexo à presente licença. Caso as obrigações do licenciado nos termos da licença compatível colidam com as suas obrigações nos termos da presente licença, prevalecem as obrigações da licença compatível. 
 
-      "Object" form shall mean any form resulting from mechanical
-      transformation or translation of a Source form, including but
-      not limited to compiled object code, generated documentation,
-      and conversions to other media types.
+Fornecimento do código-fonte: ao distribuir ou comunicar cópias da obra, o licenciado fornece uma cópia legível por computador do código-fonte ou indica um repositório onde este código esteja disponível fácil e gratuitamente enquanto o licenciado continuar a distribuir ou comunicar a obra. 
 
-      "Work" shall mean the work of authorship, whether in Source or
-      Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below).
+Proteção jurídica: a presente licença não permite a utilização de firmas, marcas ou nomes do licenciante, exceto na medida do necessário para uma utilização razoável e conforme com as práticas habituais na descrição da origem da obra e na reprodução do teor do aviso sobre os direitos de autor.
 
-      "Derivative Works" shall mean any work, whether in Source or Object
-      form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications
-      represent, as a whole, an original work of authorship. For the purposes
-      of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,
-      the Work and Derivative Works thereof.
+6.Cadeia de criação 
+O licenciante original garante que os direitos de autor sobre a obra original concedidos pela presente licença lhe pertencem ou lhe foram licenciados e que tem legitimidade para conceder a licença. Cada contribuidor garante que os direitos de autor sobre as alterações que introduziu na obra lhe pertencem ou lhe foram licenciados e que tem legitimidade para conceder a licença. Sempre que o licenciado aceite a licença, o licenciante original e os contribuidores subsequentes concedem ao licenciado uma licença respeitante aos seus contributos para a obra nos termos da presente licença. 
 
-      "Contribution" shall mean any work of authorship, including
-      the original version of the Work and any modifications or additions
-      to that Work or Derivative Works thereof, that is intentionally
-      submitted to Licensor for inclusion in the Work by the copyright owner
-      or by an individual or Legal Entity authorized to submit on behalf of
-      the copyright owner. For the purposes of this definition, "submitted"
-      means any form of electronic, verbal, or written communication sent
-      to the Licensor or its representatives, including but not limited to
-      communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the
-      Licensor for the purpose of discussing and improving the Work, but
-      excluding communication that is conspicuously marked or otherwise
-      designated in writing by the copyright owner as "Not a Contribution."
+7.Exclusão de garantia 
+A obra é um trabalho em curso, continuamente melhorado por numerosos contribuidores. Não é um trabalho acabado, pelo que pode conter defeitos ou erros inerentes a este tipo de trabalho de criação. Por essa razão, a obra é fornecida «tal e qual» nos termos da licença e sem quaisquer garantias, como, entre outras, as respeitantes à comercialização, adequação a um determinado fim, ausência de defeitos ou erros, fiabilidade e não--violação dos direitos de propriedade intelectual distintos dos direitos de autor a que se refere o ponto 6 da presente licença. A presente exclusão de garantia constitui um elemento essencial da licença e uma condição para a concessão de quaisquer direitos sobre a obra. 
 
-      "Contributor" shall mean Licensor and any individual or Legal Entity
-      on behalf of whom a Contribution has been received by Licensor and
-      subsequently incorporated within the Work.
+8.Exclusão de responsabilidade 
+Excetuados os casos de conduta dolosa ou de danos diretamente causados a pessoas singulares, o licenciante não é, em caso algum, responsável por quaisquer danos diretos ou indiretos, materiais ou morais, de qualquer natureza, decorrentes da licença ou da utilização da obra, como, por exemplo, danos por perda de clientela, paragem do trabalho, falhas ou anomalias no funcionamento do equipamento informático, perda de dados ou qualquer dano comercial, ainda que o licenciante tenha sido avisado da possibilidade da ocorrência de tais danos. No entanto, o licenciante é responsável nos termos da legislação relativa à responsabilidade por produtos na medida em que tal legislação seja aplicável à obra. 
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
-      Work and such Derivative Works in Source or Object form.
+9.Acordos suplementares 
+Ao distribuir a obra, o licenciado (enquanto licenciante) pode concluir um acordo suplementar, definindo obrigações ou serviços compatíveis com a presente licença. No entanto, ao aceitar essas obrigações, o licenciado (enquanto licenciante) age apenas em seu nome e por sua exclusiva responsabilidade e não em nome do licenciante original ou de qualquer outro contribuidor e apenas no caso de o licenciado (enquanto licenciante) aceitar indemnizar e defender estes contribuidores, exonerando-os de qualquer responsabilidade caso venham a ser acusados como consequência de o licenciado (enquanto licenciante) ter aceitado obrigações de garantia ou de responsabilidade suplementar. 
 
-   3. Grant of Patent License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      (except as stated in this section) patent license to make, have made,
-      use, offer to sell, sell, import, and otherwise transfer the Work,
-      where such license applies only to those patent claims licensable
-      by such Contributor that are necessarily infringed by their
-      Contribution(s) alone or by combination of their Contribution(s)
-      with the Work to which such Contribution(s) was submitted. If You
-      institute patent litigation against any entity (including a
-      cross-claim or counterclaim in a lawsuit) alleging that the Work
-      or a Contribution incorporated within the Work constitutes direct
-      or contributory patent infringement, then any patent licenses
-      granted to You under this License for that Work shall terminate
-      as of the date such litigation is filed.
+10.Aceitação da licença 
+Para aceitar o disposto na presente licença, o licenciado pode clicar no ícone «Aceito», situado na parte inferior de uma janela que contém o texto da presente licença, ou exprimir o seu consentimento por qualquer outra forma similar, em conformidade com a legislação aplicável. Ao clicar no referido ícone, o licenciado aceita de forma clara e irrevogável a presente licença e os seus termos e condições. Do mesmo modo, o licenciado aceita irrevogavelmente a presente licença, bem como os seus termos e condições, ao exercer quaisquer direitos concedidos pelo ponto 2 da presente licença, nomeadamente a utilização da obra, a criação pelo licenciado de uma obra derivada ou a distribuição ou comunicação pelo licenciado da obra ou de cópias desta. 
 
-   4. Redistribution. You may reproduce and distribute copies of the
-      Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+11.Informação ao público 
+Caso o licenciado distribua ou comunique a obra através de meios de comunicação eletrónicos (por exemplo, oferecendo a possibilidade de a telecarregar), o canal ou meio de distribuição (por exemplo, um sítio web) deve fornecer ao público, no mínimo, a informação exigida pela legislação aplicável no que respeita ao licenciante, à licença e ao modo como pode ser obtida, concluída, armazenada e reproduzida pelo licenciado.
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+12.Cessação da licença 
+A licença e os direitos por ela concedidos cessam automaticamente caso o licenciado não respeite o disposto na licença. Esta cessação não acarreta a cessação das licenças das pessoas que tenham recebido a obra do licenciado nos termos da licença, desde que essas pessoas continuem a respeitar plenamente o disposto na licença. 
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+13.Diversos 
+Sem prejuízo do disposto no ponto 9, a licença representa o acordo integral entre as Partes no que respeita à obra. Caso uma disposição da licença seja inválida ou ineficaz por força da legislação aplicável, tal não afeta a validade ou a eficácia da licença no seu todo. Tal disposição será interpretada ou reformulada na medida do necessário para a tornar válida e eficaz. A Comissão Europeia pode publicar outras versões linguísticas, novas versões da presente licença ou versões atualizadas do apêndice, na medida em que tal seja necessário e razoável, sem reduzir o âmbito de aplicação dos direitos concedidos pela licença. As novas versões da licença serão publicadas com um número de versão único. Todas as versões linguísticas da presente licença, aprovadas pela Comissão Europeia, têm idêntico valor. As Partes podem utilizar a versão linguística da sua preferência. 
 
-      (c) You must retain, in the Source form of any Derivative Works
-          that You distribute, all copyright, patent, trademark, and
-          attribution notices from the Source form of the Work,
-          excluding those notices that do not pertain to any part of
-          the Derivative Works; and
+14.Jurisdição 
+Sem prejuízo de um acordo específico entre as Partes, 
+—  o Tribunal de Justiça da União Europeia tem competência exclusiva para dirimir qualquer litígio resultante da interpretação da presente licença entre as instituições, órgãos, organismos ou agências da União Europeia enquanto licenciantes, e qualquer licenciado, em conformidade com o disposto no artigo 272.o do Tratado sobre o Funcionamento da União Europeia,
+—  o tribunal da residência do licenciante ou do local onde este exerce a sua atividade principal tem competência exclusiva para dirimir qualquer litígio entre outras Partes resultante da interpretação da presente licença. 
 
-      (d) If the Work includes a "NOTICE" text file as part of its
-          distribution, then any Derivative Works that You distribute must
-          include a readable copy of the attribution notices contained
-          within such NOTICE file, excluding those notices that do not
-          pertain to any part of the Derivative Works, in at least one
-          of the following places: within a NOTICE text file distributed
-          as part of the Derivative Works; within the Source form or
-          documentation, if provided along with the Derivative Works; or,
-          within a display generated by the Derivative Works, if and
-          wherever such third-party notices normally appear. The contents
-          of the NOTICE file are for informational purposes only and
-          do not modify the License. You may add Your own attribution
-          notices within Derivative Works that You distribute, alongside
-          or as an addendum to the NOTICE text from the Work, provided
-          that such additional attribution notices cannot be construed
-          as modifying the License.
+15.Direito aplicável 
+Sem prejuízo de um acordo específico entre as Partes, 
+—  a presente licença é regida pelo direito do Estado-Membro da União Europeia onde o licenciante tenha a sua sede, domicílio ou estabelecimento, 
+—  a presente licença é regida pelo direito belga, caso o licenciante não tenha a sua sede, domicílio ou estabelecimento num Estado-Membro da União Europeia.
 
-      You may add Your own copyright statement to Your modifications and
-      may provide additional or different license terms and conditions
-      for use, reproduction, or distribution of Your modifications, or
-      for any such Derivative Works as a whole, provided Your use,
-      reproduction, and distribution of the Work otherwise complies with
-      the conditions stated in this License.
 
-   5. Submission of Contributions. Unless You explicitly state otherwise,
-      any Contribution intentionally submitted for inclusion in the Work
-      by You to the Licensor shall be under the terms and conditions of
-      this License, without any additional terms or conditions.
-      Notwithstanding the above, nothing herein shall supersede or modify
-      the terms of any separate license agreement you may have executed
-      with Licensor regarding such Contributions.
-
-   6. Trademarks. This License does not grant permission to use the trade
-      names, trademarks, service marks, or product names of the Licensor,
-      except as required for reasonable and customary use in describing the
-      origin of the Work and reproducing the content of the NOTICE file.
-
-   7. Disclaimer of Warranty. Unless required by applicable law or
-      agreed to in writing, Licensor provides the Work (and each
-      Contributor provides its Contributions) on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-      implied, including, without limitation, any warranties or conditions
-      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
-      PARTICULAR PURPOSE. You are solely responsible for determining the
-      appropriateness of using or redistributing the Work and assume any
-      risks associated with Your exercise of permissions under this License.
-
-   8. Limitation of Liability. In no event and under no legal theory,
-      whether in tort (including negligence), contract, or otherwise,
-      unless required by applicable law (such as deliberate and grossly
-      negligent acts) or agreed to in writing, shall any Contributor be
-      liable to You for damages, including any direct, indirect, special,
-      incidental, or consequential damages of any character arising as a
-      result of this License or out of the use or inability to use the
-      Work (including but not limited to damages for loss of goodwill,
-      work stoppage, computer failure or malfunction, or any and all
-      other commercial damages or losses), even if such Contributor
-      has been advised of the possibility of such damages.
-
-   9. Accepting Warranty or Additional Liability. While redistributing
-      the Work or Derivative Works thereof, You may choose to offer,
-      and charge a fee for, acceptance of support, warranty, indemnity,
-      or other liability obligations and/or rights consistent with this
-      License. However, in accepting such obligations, You may act only
-      on Your own behalf and on Your sole responsibility, not on behalf
-      of any other Contributor, and only if You agree to indemnify,
-      defend, and hold each Contributor harmless for any liability
-      incurred by, or claims asserted against, such Contributor by reason
-      of your accepting any such warranty or additional liability.
-
-   END OF TERMS AND CONDITIONS
-
-   APPENDIX: How to apply the Apache License to your work.
-
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "[]"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
-
-   Copyright [yyyy] [name of copyright owner]
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+Apêndice
+As «licenças compatíveis» a que se refere o ponto 5 da EUPL são: 
+—  GNU General Public License (GPL) v. 2, v. 3 
+—  GNU Affero General Public License (AGPL) v. 3 
+—  Open Software License (OSL) v. 2.1, v. 3.0 
+—  Eclipse Public License (EPL) v. 1.0 
+—  CeCILL v. 2.0, v. 2.1 
+—  Mozilla Public Licence (MPL) v. 2 
+—  GNU Lesser General Public Licence (LGPL) v. 2.1, v. 3 
+—  Creative Commons Attribution-ShareAlike v. 3.0 Unported (CC BY-SA 3.0) para obras que não sejam software 
+—  European Union Public Licence (EUPL) v. 1.1, v. 1.2 
+—  Québec Free and Open-Source Licence — Reciprocity (LiLiQ-R) or Strong Reciprocity (LiLiQ-R+).
+A Comissão pode atualizar o presente apêndice a fim de incluir novas versões das licenças supra, sem a produção de uma nova versão da EUPL, desde que tais versões concedam os direitos conferidos pelo ponto 2 da presente licença e protejam o código-fonte abrangido de apropriação exclusiva.
+Todas as outras alterações ou aditamentos ao presente apêndice exigem a produção de uma nova versão da EUPL.

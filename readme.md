@@ -7,7 +7,7 @@ tabuleiro de areia, como os primeiros aritmetas indo-árabes,
 tabuleiros de areia (Takth al Turab), onde se desenhavam numerais, onde
 se calculava na areia.
 
-![Thakt al Turab](Thakt-al-Turab-book-excerpt.jpg)
+![Thakt al Turab](./Thakt-al-Turab-book-excerpt.jpg)
 
 *in* ArteCódigo (2025), Calcular na Areia 2425, Santarém: ArteCódigo Publicações. AC22003, 205pp. ISBN 978-989-33-8051-2. URL https://artecodigo.pt/pub/
 
